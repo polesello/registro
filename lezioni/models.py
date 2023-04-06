@@ -44,6 +44,7 @@ class Modulo(models.Model):
 class Materia(models.Model):
     nome = models.CharField(max_length=100)
     modulo = models.ForeignKey(Modulo, on_delete=models.PROTECT)
+    docente = models.ForeignKey(Persona, on_delete=models.PROTECT, null=True, blank=True)
 
     def __str__(self):
         return self.nome
@@ -53,9 +54,20 @@ class Materia(models.Model):
 
 
 class Lezione(models.Model):
+
+    TIPI_LEZIONE = (
+        (None, 'Seleziona...'),
+        ('T', 'Teoria'),
+        ('P', 'Pratica'),
+    )
+
     materia = models.ForeignKey(Materia, on_delete=models.PROTECT)
-    argomento = models.TextField(null=True, blank=True)
+    argomento = models.TextField(verbose_name="Di cosa avete parlato?", null=True, blank=True, help_text="Scrivi almeno 3 parole")
     data = models.DateField()
+    online = models.BooleanField(default=False)
+    tipologia = models.CharField(max_length=1, choices=TIPI_LEZIONE, null=True)
+    ora_inizio = models.TimeField(null=True, blank=True)
+    ora_fine = models.TimeField(null=True, blank=True)
 
     def __str__(self):
         return f'{self.materia} del {self.data}'
@@ -76,3 +88,17 @@ class Presenza(models.Model):
     class Meta:
         verbose_name_plural = 'Presenze'
         ordering = ['persona', 'lezione']
+
+
+class Iscrizione(models.Model):
+    persona = models.ForeignKey(Persona, on_delete=models.PROTECT)
+    corso = models.ForeignKey(Corso, on_delete=models.PROTECT)
+    data_iscrizione = models.DateField()
+    data_ritiro = models.DateField(null=True, blank=True)
+
+    def __str__(self):
+        return f'{self.persona} - {self.corso}'
+    
+    class Meta:
+        verbose_name_plural = 'Iscrizioni'
+        ordering = ['persona', 'corso']
