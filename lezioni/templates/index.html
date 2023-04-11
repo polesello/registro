@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evviva Django</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css" integrity="sha512-SbiR/eusphKoMVVXysTKG/7VseWii+Y3FdHrt0EpKgpToZeemhqHeZeLWLhJutz/2ut2Vw1uQEj2MbRF+TVBUA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div class="container">
+        <h1>Che bellezza!</h1>
+
+        <h2>Ciao, {{nome.upper }} {{cognome}}</h2>
+        <p>Il mio primo template</p>
+
+        Ci sono <strong><big>{{totale_gatti}}</big></strong> gatti in questo sito
+        <p>
+            {% if totale_gatti < 22 %}
+                Sono pochi
+            {% else %}
+                Sono tanti
+            {% endif %}
+        </p>    
+
+        {% if totale_gatti < presenti %}
+            <div class="alert alert-danger">Non ci sono abbastanza gatti</div>
+        {% else %}
+            <div class="alert alert-success">Abbiamo abbastanza gatti</div>
+        {% endif %}
+
+        <progress style="width: 100%;" value="{{totale_gatti}}" max="44"> 32% </progress>
+
+<div class="row">
+{% for persona in persone %}
+<div class="col-lg-4 mb-4">
+    <div class="card card-body bg-light h-100">
+        <img src="https://wips.plug.it/cips/supereva/cms/2016/06/gatto-1.jpg" alt="" style="height: 150px; width: 100%; object-fit: cover;">
+        <h3>{{persona.nome}} {{persona.cognome}}</h3>
+    </div>
+</div>
+{% endfor %}
+</div>
+
+        {% comment %}
+        {% for gatto in lista_gatti %}
+
+<img src="https://wips.plug.it/cips/supereva/cms/2016/06/gatto-1.jpg" alt="" height="60">
+        {% endfor %}
+        {% endcomment %}
+
+    </div>
+
+</body>
+</html>
+
+

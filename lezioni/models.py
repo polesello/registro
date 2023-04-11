@@ -7,6 +7,10 @@ class Corso(models.Model):
     data_inizio = models.DateField()
     data_fine = models.DateField()
 
+
+    def numero_iscritti(self):
+        return 'Nessuno'
+
     def __str__(self):
         return self.titolo
     

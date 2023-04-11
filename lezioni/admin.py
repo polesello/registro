@@ -19,6 +19,7 @@ class CorsoAdmin(admin.ModelAdmin):
     inlines = [
         IscrizioneInline,
     ]
+    list_display = ('titolo', 'data_inizio', 'numero_iscritti')
 
 admin.site.register(Corso, CorsoAdmin)
 
