@@ -10,16 +10,16 @@
     <div class="container">
         <h1>Che bellezza!</h1>
 
-        <h2>Ciao, {{nome.upper }} {{cognome}}</h2>
+        <h2>Ciao, {{user}}</h2>
         <p>Il mio primo template</p>
 
-        Ci sono <strong><big>{{totale_gatti}}</big></strong> gatti in questo sito
+        Ci sono <strong><big>{{    totale_gatti  }}</big></strong> gatti in questo sito
         <p>
             {% if totale_gatti < 22 %}
                 Sono pochi
-            {% else %}
+                            {% else %}
                 Sono tanti
-            {% endif %}
+    {% endif %}
         </p>    
 
         {% if totale_gatti < presenti %}
@@ -35,7 +35,7 @@
 <div class="col-lg-4 mb-4">
     <div class="card card-body bg-light h-100">
         <img src="https://wips.plug.it/cips/supereva/cms/2016/06/gatto-1.jpg" alt="" style="height: 150px; width: 100%; object-fit: cover;">
-        <h3>{{persona.nome}} {{persona.cognome}}</h3>
+        <h3>{{forloop.counter}}.  {{persona.nome}} {{persona.cognome}}</h3>
     </div>
 </div>
 {% endfor %}

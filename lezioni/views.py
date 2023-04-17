@@ -20,7 +20,7 @@ def index(request):
     }
 
     print(context)
-    return render(request, 'index.html', context)
+    return render(request, 'homepage.html', context)
 
 
 def index_old(request):
@@ -28,3 +28,26 @@ def index_old(request):
         return HttpResponse("<h1 style='color:red'>Ciaone</h1>")
     else:
         return HttpResponse("<h4>Ciao</h4>")
+    
+
+
+def mostra_targa(request, targa):
+
+    prossima = 'cc123aa'
+    valid = targa[:2].isalpha() and targa[2:5].isdigit() and targa[5:].isalpha()
+    square = False
+    if len(targa) == 7 and valid:
+        targa = targa.upper()
+
+        prossima = targa[:2] + str(int(targa[2:5]) + 1).zfill(3) + targa[5:]
+
+        targa = targa[:2] + ' &nbsp; ' + targa[2:]
+        square = targa.startswith('Z')
+
+    context = {
+        'targa': targa,
+        'valid': valid,
+        'square': square,
+        'prossima': prossima,
+    }
+    return render(request, 'targa.html', context)

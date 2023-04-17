@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evviva Django</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css" integrity="sha512-SbiR/eusphKoMVVXysTKG/7VseWii+Y3FdHrt0EpKgpToZeemhqHeZeLWLhJutz/2ut2Vw1uQEj2MbRF+TVBUA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        #targa {
+            font-size: 100px;
+            font-weight: bold;
+            padding: 10px;
+            margin: 30px;
+            text-align: center;
+            border: 1px solid #333;
+            border-radius: 10px;
+            position: relative;
+            width: 800px;
+        }
+        #targa::before {
+            content: "";
+            display: block;
+            position: absolute;
+            background-color: #224c9a;
+            top: 0;
+            height: 100%;
+            width: 50px;
+            left: 0;
+            border-radius: 10px 0 0 10px;
+        }
+
+        #targa.square {
+            width: 500px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+    
+        {% if valid %}
+        <div id="targa"{% if square %} class="square"{% endif %}>
+            {{targa|safe}}
+        </div>
+        {% else %}
+        <div class="alert alert-danger">
+            Targa non valida
+        </div>
+        {% endif %}
+
+
+
+    <a href="{% url 'mostra_targa' prossima %}" class="btn btn-success">Prossima</a>
+</div>
+
+    {% if square %}
+
+<script>
+    alert("La targa è quadrata, hai una Jeep?")
+</script>
+
+    {% endif %}
+
+</body>
+</html>
+
+
