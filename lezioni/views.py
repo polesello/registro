@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
-from .models import Persona
+from .models import *
 
 
 def index(request):
@@ -51,3 +51,20 @@ def mostra_targa(request, targa):
         'prossima': prossima,
     }
     return render(request, 'targa.html', context)
+
+
+def corsi(request):
+    context = {
+        'corsi': Corso.objects.all(),
+    }
+    return render(request, 'corsi.html', context)
+
+
+def lezioni(request, id):
+    corso = Corso.objects.get(id=id)
+    lezioni = Lezione.objects.filter(materia__modulo__corso=corso)
+    context = {
+        'corso': corso,
+        'lezioni': lezioni
+    }
+    return render(request, 'lezioni.html', context)

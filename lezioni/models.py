@@ -48,7 +48,7 @@ class Modulo(models.Model):
 class Materia(models.Model):
     nome = models.CharField(max_length=100)
     modulo = models.ForeignKey(Modulo, on_delete=models.PROTECT)
-    docente = models.ForeignKey(Persona, on_delete=models.PROTECT, null=True, blank=True)
+    docente = models.ForeignKey(Persona, on_delete=models.PROTECT, null=True, blank=True, related_name='materie')
 
     def __str__(self):
         return self.nome
