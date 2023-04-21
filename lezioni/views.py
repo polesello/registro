@@ -62,7 +62,8 @@ def corsi(request):
 
 def lezioni(request, id):
     corso = Corso.objects.get(id=id)
-    lezioni = Lezione.objects.filter(materia__modulo__corso=corso)
+    lezioni = Lezione.objects.filter(materia__modulo__corso=corso).order_by('materia__nome')
+    print(lezioni.query)
     context = {
         'corso': corso,
         'lezioni': lezioni

@@ -1,0 +1,11 @@
+.corso{
+    background-color: #2d2d6a;
+    height: 600px;
+    padding: 100px 30px;
+    box-shadow: 0 0 20px #666;
+}
+.corso h2{
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 15px;
+}
