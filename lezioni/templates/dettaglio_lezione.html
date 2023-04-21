@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block page_title %}{{lezione}}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-6">
+            <h2>Iscritti</h2>
+
+    <ul>
+        {% for iscrizione in lezione.materia.modulo.corso.iscrizioni.all %}
+        <li{% if iscrizione.data_ritiro %} style="text-decoration:line-through"{% endif %}>{{iscrizione.persona}}</li>
+        {% endfor %}
+    </ul>
+        </div>
+        <div class="col-lg-6">
+
+            <h1>Data: {{lezione.data|date:'j/n/Y'}}</h1>
+
+            <p>Materia: <strong>{{lezione.materia}}</strong></p>
+            <p>Argomento: <strong>{{lezione.argomento}}</strong></p>
+            <p>Dalle <strong>{{lezione.ora_inizio|default:'--:--'}}</strong> alle <strong>{{lezione.ora_fine|default:'--:--'}}</strong></p>
+
+            <p>Firma del docente ({{ lezione.materia.docente }})  __________________</p>
+        </div>
+    </div>
+{% endblock %}

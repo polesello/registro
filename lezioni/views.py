@@ -69,3 +69,9 @@ def lezioni(request, id):
         'lezioni': lezioni
     }
     return render(request, 'lezioni.html', context)
+
+
+def dettaglio_lezione(request, id):
+    lezione = Lezione.objects.get(id=id)
+    context = {'lezione': lezione}
+    return render(request, 'dettaglio_lezione.html', context)

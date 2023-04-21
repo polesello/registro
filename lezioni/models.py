@@ -35,7 +35,7 @@ class Persona(models.Model):
 
 class Modulo(models.Model):
     nome = models.CharField(max_length=100)
-    corso = models.ForeignKey(Corso, on_delete=models.PROTECT)
+    corso = models.ForeignKey(Corso, on_delete=models.PROTECT, related_name="moduli")
 
     def __str__(self):
         return self.nome
@@ -47,7 +47,7 @@ class Modulo(models.Model):
 
 class Materia(models.Model):
     nome = models.CharField(max_length=100)
-    modulo = models.ForeignKey(Modulo, on_delete=models.PROTECT)
+    modulo = models.ForeignKey(Modulo, on_delete=models.PROTECT, related_name="materie")
     docente = models.ForeignKey(Persona, on_delete=models.PROTECT, null=True, blank=True, related_name='materie')
 
     def __str__(self):
@@ -65,7 +65,7 @@ class Lezione(models.Model):
         ('P', 'Pratica'),
     )
 
-    materia = models.ForeignKey(Materia, on_delete=models.PROTECT)
+    materia = models.ForeignKey(Materia, on_delete=models.PROTECT, related_name="lezioni")
     argomento = models.TextField(verbose_name="Di cosa avete parlato?", null=True, blank=True, help_text="Scrivi almeno 3 parole")
     data = models.DateField()
     online = models.BooleanField(default=False)
@@ -96,7 +96,7 @@ class Presenza(models.Model):
 
 class Iscrizione(models.Model):
     persona = models.ForeignKey(Persona, on_delete=models.PROTECT)
-    corso = models.ForeignKey(Corso, on_delete=models.PROTECT)
+    corso = models.ForeignKey(Corso, on_delete=models.PROTECT, related_name="iscrizioni")
     data_iscrizione = models.DateField()
     data_ritiro = models.DateField(null=True, blank=True)
 
