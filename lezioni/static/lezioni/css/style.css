@@ -22,3 +22,11 @@ header img {
     padding: 8px;
     background: #fff;
 }
+
+#presenze label {
+    color: red;
+}
+
+#presenze input:checked + label {
+    color: green;
+}

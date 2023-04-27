@@ -82,16 +82,16 @@ class Lezione(models.Model):
 
 
 class Presenza(models.Model):
-    persona = models.ForeignKey(Persona, on_delete=models.PROTECT)
-    lezione = models.ForeignKey(Lezione, on_delete=models.PROTECT)
-    presente = models.BooleanField()
+    persona = models.ForeignKey(Persona, on_delete=models.PROTECT, related_name="presenze")
+    lezione = models.ForeignKey(Lezione, on_delete=models.PROTECT, related_name="presenze")
 
     def __str__(self):
-        return f'{self.persona} - {self.lezione} - {self.presente}'
+        return f'{self.persona} - {self.lezione}'
     
     class Meta:
         verbose_name_plural = 'Presenze'
         ordering = ['persona', 'lezione']
+        unique_together = ['persona', 'lezione']
 
 
 class Iscrizione(models.Model):

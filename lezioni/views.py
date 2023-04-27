@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
 from .models import *
@@ -73,5 +73,20 @@ def lezioni(request, id):
 
 def dettaglio_lezione(request, id):
     lezione = Lezione.objects.get(id=id)
-    context = {'lezione': lezione}
+
+    presenti = request.POST.getlist('presente')
+    print('presenti ' , presenti )
+
+    if request.method == 'POST':
+        Presenza.objects.filter(lezione=lezione).delete()
+
+        print("Adesso salvo i presenti")
+        for id_persona in presenti:
+            presenza = Presenza(lezione=lezione, persona_id=id_persona)
+            presenza.save()
+
+        return redirect(request.path)
+
+    persone_presenti = Persona.objects.filter(presenze__lezione = lezione)
+    context = {'lezione': lezione, 'persone_presenti':persone_presenti}
     return render(request, 'dettaglio_lezione.html', context)
