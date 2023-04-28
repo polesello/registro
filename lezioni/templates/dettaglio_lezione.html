@@ -18,7 +18,7 @@
         </li>
         {% endfor %}
     </ul>
-    <input class="btn btn-success" type="submit" name="action" value="Invia">
+    <input class="btn btn-success" type="submit" name="salva-presenze" value="Invia">
 
 </form>
 
@@ -28,6 +28,18 @@ Presenze:
 
         </div>
         <div class="col-lg-6">
+
+            <hr>
+
+<form method="post">
+    {% csrf_token %}
+    <table class="table">
+        {{form.as_table}}
+    </table>
+    <input type="submit" name="salva-dettagli" value="Salva" class="btn btn-success">
+</form>
+
+            <hr>
 
             <h1>Data: {{lezione.data|date:'j/n/Y'}}</h1>
 

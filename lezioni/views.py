@@ -72,21 +72,26 @@ def lezioni(request, id):
 
 
 def dettaglio_lezione(request, id):
+    from .forms import LezioneForm
+
     lezione = Lezione.objects.get(id=id)
+
+    form = LezioneForm(instance=lezione)
 
     presenti = request.POST.getlist('presente')
     print('presenti ' , presenti )
 
     if request.method == 'POST':
-        Presenza.objects.filter(lezione=lezione).delete()
+        # Salva i presenti alla lezione
+        if 'salva-presenze' in request.POST:
+            Presenza.objects.filter(lezione=lezione).delete()
 
-        print("Adesso salvo i presenti")
-        for id_persona in presenti:
-            presenza = Presenza(lezione=lezione, persona_id=id_persona)
-            presenza.save()
+            for id_persona in presenti:
+                presenza = Presenza(lezione=lezione, persona_id=id_persona)
+                presenza.save()
 
-        return redirect(request.path)
+            return redirect(request.path)
 
     persone_presenti = Persona.objects.filter(presenze__lezione = lezione)
-    context = {'lezione': lezione, 'persone_presenti':persone_presenti}
+    context = {'lezione': lezione, 'persone_presenti':persone_presenti, 'form':form}
     return render(request, 'dettaglio_lezione.html', context)
