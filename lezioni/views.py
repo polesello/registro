@@ -61,9 +61,34 @@ def corsi(request):
 
 
 def lezioni(request, id):
+    import openpyxl
+
     corso = Corso.objects.get(id=id)
-    lezioni = Lezione.objects.filter(materia__modulo__corso=corso).order_by('materia__nome')
-    print(lezioni.query)
+    lezioni = Lezione.objects.filter(materia__modulo__corso=corso).order_by('data')
+
+    if 'excel' in request.GET:
+
+        wb = openpyxl.Workbook()
+        ws = wb.active
+        ws.title = corso.titolo
+
+        c = ws.cell(row=2, column=3)
+        c.value = 'CIAO'
+
+        for i, lezione in enumerate(lezioni):
+            c = ws.cell(row=i+1, column=1) 
+            c.value = lezione.argomento
+
+            c = ws.cell(row=i+1, column=2) 
+            c.value = lezione.materia.nome
+
+        response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        response['Content-Disposition'] = 'inline; filename=calendario.xlsx'
+        
+        wb.save(response)
+
+        return response
+    
     context = {
         'corso': corso,
         'lezioni': lezioni

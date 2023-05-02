@@ -6,6 +6,8 @@
                 <img src="{% static 'lezioni/images/cff.png' %}" alt="Friuli Formazione">
 
                 <a href="{% url 'corsi' %}">Home page</a>
+
+                {{request.user.is_authenticated}}
             </div>
         </div>
     </div>
