@@ -76,6 +76,13 @@ class Lezione(models.Model):
     def __str__(self):
         return f'{self.materia} del {self.data}'
     
+
+    def durata(self):
+        from datetime import datetime, date
+        if self.ora_inizio and self.ora_fine:
+            return datetime.combine(date.today(), self.ora_fine) - datetime.combine(date.today(), self.ora_inizio)
+
+
     class Meta:
         verbose_name_plural = 'Lezioni'
         ordering = ['-data']

@@ -8,13 +8,17 @@
         <tr>
             <th>Data</th>
             <th>Materia</th>
-            <th>Argomento</th>
+            <th>Inizio, fine</th>
+            <th>Durata</th>
+            <th>Presenze</th>
         </tr>
     {% for lezione in lezioni %}
         <tr>
             <td><a href="{% url 'dettaglio_lezione' lezione.pk %}">{{lezione.data}}</a></td>
             <td>{{lezione.materia}}</td>
-            <td>{{lezione.argomento}}</td>
+            <td>{{lezione.ora_inizio}} — {{lezione.ora_fine}}</td>
+            <td>{{lezione.durata}}</td>
+            <td>{{lezione.presenze.count}}</td>
         </tr>
     {% endfor %}
     </table>

@@ -31,7 +31,7 @@ Presenze:
 
             <hr>
 
-<form method="post">
+<form method="post" novalidate>
     {% csrf_token %}
     <table class="table">
         {{form.as_table}}
@@ -47,6 +47,7 @@ Presenze:
             <p>Materia: <strong>{{lezione.materia}}</strong></p>
             <p>Argomento: <strong>{{lezione.argomento}}</strong></p>
             <p>Dalle <strong>{{lezione.ora_inizio|default:'--:--'}}</strong> alle <strong>{{lezione.ora_fine|default:'--:--'}}</strong></p>
+            <p>Durata: {{lezione.durata}}</p>
 
             <p>Firma del docente ({{ lezione.materia.docente }})  __________________</p>
         </div>
