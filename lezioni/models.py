@@ -83,6 +83,14 @@ class Lezione(models.Model):
             return datetime.combine(date.today(), self.ora_fine) - datetime.combine(date.today(), self.ora_inizio)
 
 
+    def prossima(self):
+        corso = self.materia.modulo.corso
+        return Lezione.objects.filter(materia__modulo__corso=corso, data__gt=self.data).order_by('data').first()
+
+    def precedente(self):
+        corso = self.materia.modulo.corso
+        return Lezione.objects.filter(materia__modulo__corso=corso, data__lt=self.data).order_by('data').last()
+    
     class Meta:
         verbose_name_plural = 'Lezioni'
         ordering = ['-data']

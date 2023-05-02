@@ -1,5 +1,15 @@
 {% extends 'base.html' %}
 
+{% block breadcrumbs %}
+<div id="breadcrumbs">
+    <div class="container">
+        <a href="{% url 'corsi' %}">Corsi</a> › <strong>{{corso}}</strong>
+    </div>
+</div>
+{% endblock %}
+
+
+
 {% block content %}
 <div class="row">
     <h1>Lista lezioni</h1>

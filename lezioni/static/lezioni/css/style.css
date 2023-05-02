@@ -11,7 +11,6 @@
 }
 
 header {
-    margin-bottom: 30px;
     padding: 20px 0;
     background: rgb(177,204,221);
 background: linear-gradient(90deg, rgba(177,204,221,1) 0%, rgba(212,237,168,1) 100%);
@@ -29,4 +28,9 @@ header img {
 
 #presenze input:checked + label {
     color: green;
+}
+
+#breadcrumbs {
+    background-color: #eee;
+    padding: 15px 0;
 }

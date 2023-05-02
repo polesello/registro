@@ -12,6 +12,13 @@
 <body>
     {% include 'header.html' %}
 
+    {% block breadcrumbs %}
+    <div id="breadcrumbs">
+        <div class="container">
+            <a href="{% url 'corsi' %}">Corsi</a>
+        </div>
+    </div>
+    {% endblock %}
     <div class="container">
        
         {% block content %}
